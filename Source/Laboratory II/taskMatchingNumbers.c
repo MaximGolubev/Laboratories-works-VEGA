@@ -1,31 +1,31 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(int argc, char* argv[])
 {
     system("clear");
-    
-    int number = 0;
-    char buffer[10];
-    
+
+    bool digits[10];
+	memset(digits, 0, sizeof(bool) * 10);
+
+	int number = 0;
+
     printf("\nPlease enter the number: ");
     scanf("%i", &number);
-    sprintf(buffer, "%i", number);
-    
-    for(int i = 0; i < 10; i++) {
-        
-        if (buffer[i] == '\0')
-            break;
-        
-        for(int k = i+1; k < 10; k++) {
-            
-            if(buffer[i] == buffer[k]) {
-                printf("\nThe number has the same numbers: %c = %c\n\n", buffer[i], buffer[k]);
-                return 0;
-            }
-        }
+
+    while (number) {
+		int digit = number % 10;
+		if (digits[digit] == true) {
+			printf("\nThe number has the same digits\n");
+			return 0;
+		}
+		else {
+			digits[digit] = true;
+		}
+		number /= 10;
     }
-    
+
     printf("\nNo digits are the same\n\n");
-    
+
 	return 0;
 }
